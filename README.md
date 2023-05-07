@@ -8,4 +8,4 @@ Standalone BPMN components for your Angular applications.
 
 ## Development server
 
-Run `nx serve ng-bpmn-app` for a dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
+Run `nx serve ng-bpmn-app` for a dev server. Navigate to <http://localhost:4200/>. The app will automatically reload if you change any of the source files.

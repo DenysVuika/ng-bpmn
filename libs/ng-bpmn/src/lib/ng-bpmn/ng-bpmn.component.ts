@@ -18,6 +18,12 @@ import { Observable, Subscription, from, map, switchMap } from 'rxjs';
 import BpmnJS from 'bpmn-js/lib/Modeler';
 import Canvas from 'diagram-js/lib/core/Canvas';
 
+export interface ImportEvent {
+  type: 'success' | 'error';
+  warnings?: string[];
+  error?: any;
+}
+
 @Component({
   selector: 'ng-bpmn',
   standalone: true,
@@ -37,7 +43,7 @@ export class NgBpmnComponent
   private el?: ElementRef;
 
   @Output()
-  importDone: EventEmitter<any> = new EventEmitter();
+  importDone = new EventEmitter<ImportEvent>();
 
   constructor(private http: HttpClient) {
     this.bpmnJS.on('import.done', ({ error }: any) => {
