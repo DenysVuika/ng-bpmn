@@ -18,8 +18,9 @@ Update `angular.json` (or `project.json`) and setup additional styles:
     "build": {
       "options": {
         "styles": [
-          "node_modules/bpmn-js/dist/assets/diagram-js.css",
-          "node_modules/bpmn-js/dist/assets/bpmn-font/css/bpmn.css",
+          "node_modules/@DenysVuika/ng-bpmn/assets/diagram-js.css",
+          "node_modules/@DenysVuika/ng-bpmn/assets/bpmn-js.css",
+          "node_modules/@DenysVuika/ng-bpmn/assets/bpmn-font/css/bpmn.css",
           "./src/styles.scss"
         ]
       }

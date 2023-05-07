@@ -22,6 +22,17 @@
       },
       "defaultConfiguration": "production"
     },
+    "release": {
+      "dependsOn": ["build"],
+      "executor": "nx:run-commands",
+      "options": {
+        "parallel": false,
+        "commands": [
+          "mkdir -p dist/libs/ng-bpmn",
+          "cp -r node_modules/bpmn-js/dist/assets dist/libs/ng-bpmn"
+        ]
+      }
+    },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
