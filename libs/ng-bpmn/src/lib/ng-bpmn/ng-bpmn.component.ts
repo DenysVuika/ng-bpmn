@@ -28,7 +28,7 @@ import { Observable, Subscription, from, map, switchMap } from 'rxjs';
 export class NgBpmnComponent
   implements OnInit, AfterContentInit, OnChanges, OnDestroy
 {
-  private bpmnJS: any = new BpmnJS();
+  private bpmnJS: BpmnJS = new BpmnJS();
 
   @Input() url?: string;
 
@@ -41,7 +41,9 @@ export class NgBpmnComponent
   constructor(private http: HttpClient) {
     this.bpmnJS.on('import.done', ({ error }: any) => {
       if (!error) {
-        this.bpmnJS.get('canvas').zoom('fit-viewport');
+        const canvas: any = this.bpmnJS.get('canvas');
+        console.log(canvas);
+        canvas?.zoom('fit-viewport');
       }
     });
   }
@@ -89,9 +91,9 @@ export class NgBpmnComponent
       );
   }
 
-  private importDiagram(xml: string): Observable<{ warnings: Array<any> }> {
+  private importDiagram(xml: string): Observable<{ warnings: Array<string> }> {
     return from(
-      this.bpmnJS.importXML(xml) as Promise<{ warnings: Array<any> }>
+      this.bpmnJS.importXML(xml) as Promise<{ warnings: Array<string> }>
     );
   }
 }
