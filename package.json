@@ -2,6 +2,11 @@
   "name": "ng-bpmn-app",
   "version": "0.0.0",
   "license": "MIT",
+  "author": {
+    "name": "Denys Vuika",
+    "email": "denys.vuika@gmail.com",
+    "url": "https://denys.dev"
+  },
   "scripts": {
     "start": "nx serve",
     "build": "nx build",

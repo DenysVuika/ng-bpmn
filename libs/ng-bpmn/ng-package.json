@@ -3,5 +3,8 @@
   "dest": "../../dist/libs/ng-bpmn",
   "lib": {
     "entryFile": "src/index.ts"
-  }
+  },
+  "allowedNonPeerDependencies": [
+    "bpmn-js"
+  ]
 }

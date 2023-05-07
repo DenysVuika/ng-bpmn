@@ -1,6 +1,12 @@
 {
   "name": "@denysvuika/ng-bpmn",
   "version": "0.0.1",
+  "license": "MIT",
+  "author": {
+    "name": "Denys Vuika",
+    "email": "denys.vuika@gmail.com",
+    "url": "https://denys.dev"
+  },
   "peerDependencies": {
     "@angular/common": "^16.0.0",
     "@angular/core": "^16.0.0"
