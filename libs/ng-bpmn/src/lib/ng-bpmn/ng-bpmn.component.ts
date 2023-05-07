@@ -1,5 +1,4 @@
 import {
-  AfterContentInit,
   Component,
   ElementRef,
   EventEmitter,
@@ -13,10 +12,18 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpClient, HttpClientModule, HttpErrorResponse } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpClientModule,
+  HttpErrorResponse,
+} from '@angular/common/http';
 import { Observable, Subscription, from, map, switchMap } from 'rxjs';
-import BpmnJS from 'bpmn-js/lib/Modeler';
+import BpmnModeler from 'bpmn-js/lib/Modeler';
 import Canvas from 'diagram-js/lib/core/Canvas';
+import {
+  BpmnPropertiesPanelModule,
+  BpmnPropertiesProviderModule,
+} from 'bpmn-js-properties-panel';
 
 export interface ImportEvent {
   type: 'success' | 'error';
@@ -37,33 +44,45 @@ interface ImportCallback {
   styleUrls: ['./ng-bpmn.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class NgBpmnComponent
-  implements OnInit, AfterContentInit, OnChanges, OnDestroy
-{
-  private bpmnJS: BpmnJS = new BpmnJS();
+export class NgBpmnComponent implements OnInit, OnChanges, OnDestroy {
+  private bpmnJS = new BpmnModeler();
 
   @Input() url?: string;
 
-  @ViewChild('ref', { static: true })
-  private container?: ElementRef;
+  @ViewChild('canvas', { static: true })
+  private canvas?: ElementRef;
+
+  @ViewChild('properties', { static: true })
+  private properties?: ElementRef;
 
   @Output()
   importDone = new EventEmitter<ImportEvent>();
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient) {}
+
+  // ngAfterContentInit(): void {
+  //   this.bpmnJS.attachTo(this.canvas?.nativeElement);
+  // }
+
+  ngOnInit(): void {
+    this.bpmnJS = new BpmnModeler({
+      container: this.canvas?.nativeElement,
+      propertiesPanel: {
+        parent: this.properties?.nativeElement,
+      },
+      additionalModules: [
+        BpmnPropertiesPanelModule,
+        BpmnPropertiesProviderModule,
+      ],
+    });
+
     this.bpmnJS.on('import.done', ({ error }: ImportCallback) => {
       if (!error) {
         const canvas = this.bpmnJS.get<Canvas>('canvas');
         canvas.zoom('fit-viewport');
       }
     });
-  }
 
-  ngAfterContentInit(): void {
-    this.bpmnJS.attachTo(this.container?.nativeElement);
-  }
-
-  ngOnInit(): void {
     if (this.url) {
       this.loadUrl(this.url);
     }
@@ -98,7 +117,7 @@ export class NgBpmnComponent
             type: 'error',
             error: err,
           });
-        }
+        },
       });
   }
 

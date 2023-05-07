@@ -13,6 +13,7 @@
     "lib": ["es2020", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
+    "noImplicitAny": false,
     "baseUrl": ".",
     "paths": {
       "@denysvuika/ng-bpmn": ["libs/ng-bpmn/src/index.ts"]

@@ -21,6 +21,8 @@ Update `angular.json` (or `project.json`) and setup additional styles:
           "node_modules/@DenysVuika/ng-bpmn/assets/diagram-js.css",
           "node_modules/@DenysVuika/ng-bpmn/assets/bpmn-js.css",
           "node_modules/@DenysVuika/ng-bpmn/assets/bpmn-font/css/bpmn.css",
+          "node_modules/@DenysVuika/ng-bpmn/assets/properties-panel.css",
+          "node_modules/@DenysVuika/ng-bpmn/assets/element-templates.css",
           "./src/styles.scss"
         ]
       }

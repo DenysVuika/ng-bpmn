@@ -6,6 +6,7 @@
   },
   "allowedNonPeerDependencies": [
     "bpmn-js",
-    "diagram-js"
+    "diagram-js",
+    "bpmn-js-properties-panel"
   ]
 }
