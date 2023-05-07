@@ -14,8 +14,9 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import BpmnJS from 'bpmn-js/lib/Modeler';
 import { Observable, Subscription, from, map, switchMap } from 'rxjs';
+import BpmnJS from 'bpmn-js/lib/Modeler';
+import Canvas from 'diagram-js/lib/core/Canvas';
 
 @Component({
   selector: 'ng-bpmn',
@@ -41,9 +42,8 @@ export class NgBpmnComponent
   constructor(private http: HttpClient) {
     this.bpmnJS.on('import.done', ({ error }: any) => {
       if (!error) {
-        const canvas: any = this.bpmnJS.get('canvas');
-        console.log(canvas);
-        canvas?.zoom('fit-viewport');
+        const canvas = this.bpmnJS.get<Canvas>('canvas');
+        canvas.zoom('fit-viewport');
       }
     });
   }

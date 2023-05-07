@@ -5,6 +5,7 @@
     "entryFile": "src/index.ts"
   },
   "allowedNonPeerDependencies": [
-    "bpmn-js"
+    "bpmn-js",
+    "diagram-js"
   ]
 }
