@@ -15,7 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@ngstack/ng-bpmn": ["libs/ng-bpmn/src/index.ts"]
+      "@denysvuika/ng-bpmn": ["libs/ng-bpmn/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

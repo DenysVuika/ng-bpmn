@@ -1,5 +1,5 @@
 {
-  "name": "@ngstack/ng-bpmn",
+  "name": "@denysvuika/ng-bpmn",
   "version": "0.0.1",
   "peerDependencies": {
     "@angular/common": "^16.0.0",

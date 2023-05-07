@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { NxWelcomeComponent } from './nx-welcome.component';
-import { NgBpmnComponent } from '@ngstack/ng-bpmn';
+import { NgBpmnComponent } from '@denysvuika/ng-bpmn';
 
 @Component({
   standalone: true,
