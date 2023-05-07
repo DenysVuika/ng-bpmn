@@ -17,7 +17,7 @@ import {
   HttpClientModule,
   HttpErrorResponse,
 } from '@angular/common/http';
-import { Observable, Subscription, from, map, switchMap } from 'rxjs';
+import { Observable, Subscription, from, map, of, switchMap } from 'rxjs';
 import BpmnModeler from 'bpmn-js/lib/Modeler';
 import Canvas from 'diagram-js/lib/core/Canvas';
 import {
@@ -45,9 +45,10 @@ interface ImportCallback {
   encapsulation: ViewEncapsulation.None,
 })
 export class NgBpmnComponent implements OnInit, OnChanges, OnDestroy {
-  private bpmnJS = new BpmnModeler();
+  private bpmnJS?: BpmnModeler;
 
   @Input() url?: string;
+  @Input() showProperties = false;
 
   @ViewChild('canvas', { static: true })
   private canvas?: ElementRef;
@@ -77,7 +78,7 @@ export class NgBpmnComponent implements OnInit, OnChanges, OnDestroy {
     });
 
     this.bpmnJS.on('import.done', ({ error }: ImportCallback) => {
-      if (!error) {
+      if (!error && this.bpmnJS) {
         const canvas = this.bpmnJS.get<Canvas>('canvas');
         canvas.zoom('fit-viewport');
       }
@@ -95,7 +96,7 @@ export class NgBpmnComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.bpmnJS.destroy();
+    this.bpmnJS?.destroy();
   }
 
   loadUrl(url: string): Subscription {
@@ -122,6 +123,10 @@ export class NgBpmnComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   private importDiagram(xml: string): Observable<{ warnings: Array<string> }> {
-    return from(this.bpmnJS.importXML(xml));
+    if (this.bpmnJS) {
+      return from(this.bpmnJS.importXML(xml));
+    } else {
+      return of({ warnings: [] });
+    }
   }
 }

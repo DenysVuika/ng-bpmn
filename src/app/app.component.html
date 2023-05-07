@@ -1,4 +1,4 @@
-<ng-bpmn [url]="diagramUrl" (importDone)="handleImported($event)" />
+<ng-bpmn [url]="diagramUrl" [showProperties]="true" (importDone)="handleImported($event)" />
 
 <div class="import-error" *ngIf="importError">
   <strong>Failed to render diagram: </strong>

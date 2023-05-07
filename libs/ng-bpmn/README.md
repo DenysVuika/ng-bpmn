@@ -31,8 +31,14 @@ Update `angular.json` (or `project.json`) and setup additional styles:
 }
 ```
 
-Use the component:
+## Basic Usage
 
 ```html
 <ng-bpmn [url]="diagramUrl" />
+```
+
+Showing Properties
+
+```html
+<ng-bpmn [url]="diagramUrl" [showProperties]="true" />
 ```

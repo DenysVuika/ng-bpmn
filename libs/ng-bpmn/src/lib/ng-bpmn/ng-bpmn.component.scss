@@ -5,10 +5,21 @@
   flex-direction: row;
 
   .canvas {
-    flex: 80%;
+    flex: 100%;
   }
 
   .properties {
-    flex: 20%;
+    display: none;
+  }
+
+  &.with-properties {
+    .canvas {
+      flex: 80%;
+    }
+
+    .properties {
+      flex: 20%;
+      display: block;
+    }
   }
 }
