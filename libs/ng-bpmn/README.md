@@ -1,3 +1,35 @@
 # Angular BPMN
 
 Standalone BPMN components for your Angular applications.
+
+## Getting Started
+
+Install the dependency:
+
+```sh
+npm i @DenysVuika/ng-bpmn
+```
+
+Update `angular.json` (or `project.json`) and setup additional styles:
+
+```json
+{
+  "targets": {
+    "build": {
+      "options": {
+        "styles": [
+          "node_modules/bpmn-js/dist/assets/diagram-js.css",
+          "node_modules/bpmn-js/dist/assets/bpmn-font/css/bpmn.css",
+          "./src/styles.scss"
+        ]
+      }
+    }
+  }
+}
+```
+
+Use the component:
+
+```html
+<ng-bpmn [url]="diagramUrl" />
+```
