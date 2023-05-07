@@ -45,7 +45,7 @@ export class NgBpmnComponent
   @Input() url?: string;
 
   @ViewChild('ref', { static: true })
-  private el?: ElementRef;
+  private container?: ElementRef;
 
   @Output()
   importDone = new EventEmitter<ImportEvent>();
@@ -60,7 +60,7 @@ export class NgBpmnComponent
   }
 
   ngAfterContentInit(): void {
-    this.bpmnJS.attachTo(this.el?.nativeElement);
+    this.bpmnJS.attachTo(this.container?.nativeElement);
   }
 
   ngOnInit(): void {

@@ -1,2 +1,8 @@
-<ng-bpmn [url]="diagramUrl" (importDone)="handleImported($event)"/>
+<ng-bpmn [url]="diagramUrl" (importDone)="handleImported($event)" />
+
+<div class="import-error" *ngIf="importError">
+  <strong>Failed to render diagram: </strong>
+  {{ importError.message }}
+</div>
+
 <router-outlet></router-outlet>

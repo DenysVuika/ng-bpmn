@@ -1,10 +1,11 @@
+import { NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ImportEvent, NgBpmnComponent } from '@denysvuika/ng-bpmn';
 
 @Component({
   standalone: true,
-  imports: [RouterModule, NgBpmnComponent],
+  imports: [NgIf, RouterModule, NgBpmnComponent],
   selector: 'ng-bpmn-app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
