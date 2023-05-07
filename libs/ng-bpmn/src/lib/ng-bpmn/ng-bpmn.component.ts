@@ -13,7 +13,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HttpErrorResponse } from '@angular/common/http';
 import { Observable, Subscription, from, map, switchMap } from 'rxjs';
 import BpmnJS from 'bpmn-js/lib/Modeler';
 import Canvas from 'diagram-js/lib/core/Canvas';
@@ -21,7 +21,12 @@ import Canvas from 'diagram-js/lib/core/Canvas';
 export interface ImportEvent {
   type: 'success' | 'error';
   warnings?: string[];
-  error?: any;
+  error?: Error;
+}
+
+interface ImportCallback {
+  error?: Error;
+  warnings?: string[];
 }
 
 @Component({
@@ -46,7 +51,7 @@ export class NgBpmnComponent
   importDone = new EventEmitter<ImportEvent>();
 
   constructor(private http: HttpClient) {
-    this.bpmnJS.on('import.done', ({ error }: any) => {
+    this.bpmnJS.on('import.done', ({ error }: ImportCallback) => {
       if (!error) {
         const canvas = this.bpmnJS.get<Canvas>('canvas');
         canvas.zoom('fit-viewport');
@@ -81,25 +86,23 @@ export class NgBpmnComponent
         switchMap((xml: string) => this.importDiagram(xml)),
         map((result) => result.warnings)
       )
-      .subscribe(
-        (warnings) => {
+      .subscribe({
+        next: (warnings) => {
           this.importDone.emit({
             type: 'success',
             warnings,
           });
         },
-        (err) => {
+        error: (err: HttpErrorResponse) => {
           this.importDone.emit({
             type: 'error',
             error: err,
           });
         }
-      );
+      });
   }
 
   private importDiagram(xml: string): Observable<{ warnings: Array<string> }> {
-    return from(
-      this.bpmnJS.importXML(xml) as Promise<{ warnings: Array<string> }>
-    );
+    return from(this.bpmnJS.importXML(xml));
   }
 }
