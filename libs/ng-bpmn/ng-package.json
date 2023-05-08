@@ -4,6 +4,7 @@
   "lib": {
     "entryFile": "src/index.ts"
   },
+  "assets": ["docs"],
   "allowedNonPeerDependencies": [
     "bpmn-js",
     "diagram-js",
