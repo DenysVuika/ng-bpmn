@@ -22,6 +22,7 @@
           "node_modules/bpmn-js/dist/assets/bpmn-font/css/bpmn.css",
           "node_modules/bpmn-js-properties-panel/dist/assets/properties-panel.css",
           "node_modules/bpmn-js-properties-panel/dist/assets/element-templates.css",
+          "node_modules/diagram-js-minimap/assets/diagram-js-minimap.css",
           "./src/styles.scss"
         ],
         "scripts": []

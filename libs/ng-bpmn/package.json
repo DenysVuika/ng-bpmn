@@ -22,6 +22,7 @@
   "dependencies": {
     "bpmn-js": "^13.0.4",
     "bpmn-js-properties-panel": "^1.22.0",
+    "diagram-js-minimap": "^4.1.0",
     "diagram-js": "^12.0.2",
     "tslib": "^2.3.0"
   },

@@ -9,21 +9,15 @@ import {
   Output,
   SimpleChanges,
   ViewChild,
-  ViewEncapsulation,
+  ViewEncapsulation
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {
-  HttpClient,
-  HttpClientModule,
-  HttpErrorResponse,
-} from '@angular/common/http';
+import { HttpClient, HttpClientModule, HttpErrorResponse } from '@angular/common/http';
 import { Observable, Subscription, from, map, of, switchMap } from 'rxjs';
 import BpmnModeler from 'bpmn-js/lib/Modeler';
 import Canvas from 'diagram-js/lib/core/Canvas';
-import {
-  BpmnPropertiesPanelModule,
-  BpmnPropertiesProviderModule,
-} from 'bpmn-js-properties-panel';
+import { BpmnPropertiesPanelModule, BpmnPropertiesProviderModule } from 'bpmn-js-properties-panel';
+import MinimapModule from 'diagram-js-minimap';
 
 export interface ImportEvent {
   type: 'success' | 'error';
@@ -42,13 +36,14 @@ interface ImportCallback {
   imports: [CommonModule, HttpClientModule],
   templateUrl: './ng-bpmn.component.html',
   styleUrls: ['./ng-bpmn.component.scss'],
-  encapsulation: ViewEncapsulation.None,
+  encapsulation: ViewEncapsulation.None
 })
 export class NgBpmnComponent implements OnInit, OnChanges, OnDestroy {
   private bpmnJS?: BpmnModeler;
 
   @Input() url?: string;
   @Input() showProperties = false;
+  @Input() showMinimap = false;
 
   @ViewChild('canvas', { static: true })
   private canvas?: ElementRef;
@@ -66,16 +61,23 @@ export class NgBpmnComponent implements OnInit, OnChanges, OnDestroy {
   // }
 
   ngOnInit(): void {
+    const additionalModules = [BpmnPropertiesPanelModule, BpmnPropertiesProviderModule];
+
+    if (this.showMinimap) {
+      additionalModules.push(MinimapModule);
+    }
+
     this.bpmnJS = new BpmnModeler({
       container: this.canvas?.nativeElement,
       propertiesPanel: {
-        parent: this.properties?.nativeElement,
+        parent: this.properties?.nativeElement
       },
-      additionalModules: [
-        BpmnPropertiesPanelModule,
-        BpmnPropertiesProviderModule,
-      ],
+      additionalModules
     });
+
+    if (this.showMinimap) {
+      this.bpmnJS.get<any>('minimap').open();
+    }
 
     this.bpmnJS.on('import.done', ({ error }: ImportCallback) => {
       if (!error && this.bpmnJS) {
@@ -110,15 +112,15 @@ export class NgBpmnComponent implements OnInit, OnChanges, OnDestroy {
         next: (warnings) => {
           this.importDone.emit({
             type: 'success',
-            warnings,
+            warnings
           });
         },
         error: (err: HttpErrorResponse) => {
           this.importDone.emit({
             type: 'error',
-            error: err,
+            error: err
           });
-        },
+        }
       });
   }
 

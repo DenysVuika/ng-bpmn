@@ -30,7 +30,8 @@
         "commands": [
           "mkdir -p dist/libs/ng-bpmn",
           "cp -r node_modules/bpmn-js/dist/assets dist/libs/ng-bpmn",
-          "cp -r node_modules/bpmn-js-properties-panel/dist/assets dist/libs/ng-bpmn"
+          "cp -r node_modules/bpmn-js-properties-panel/dist/assets dist/libs/ng-bpmn",
+          "cp -r node_modules/diagram-js-minimap/assets dist/libs/ng-bpmn"
         ]
       }
     },

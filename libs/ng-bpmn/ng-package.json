@@ -8,6 +8,7 @@
   "allowedNonPeerDependencies": [
     "bpmn-js",
     "diagram-js",
-    "bpmn-js-properties-panel"
+    "bpmn-js-properties-panel",
+    "diagram-js-minimap"
   ]
 }

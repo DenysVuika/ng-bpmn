@@ -23,6 +23,7 @@ Update `angular.json` (or `project.json`) and setup additional styles:
           "node_modules/@DenysVuika/ng-bpmn/assets/bpmn-font/css/bpmn.css",
           "node_modules/@DenysVuika/ng-bpmn/assets/properties-panel.css",
           "node_modules/@DenysVuika/ng-bpmn/assets/element-templates.css",
+          "node_modules/@DenysVuika/ng-bpmn/assets/diagram-js-minimap.css"
           "./src/styles.scss"
         ]
       }
@@ -46,3 +47,11 @@ Update `angular.json` (or `project.json`) and setup additional styles:
 ```
 
 ![properties panel](./docs/ng-bpmn-properties.png)
+
+## Minimap
+
+```html
+<ng-bpmn [url]="diagramUrl" [showProperties]="true" [showMinimap]="true" />
+```
+
+![minimap](./docs/ng-bpmn-minimap.png)

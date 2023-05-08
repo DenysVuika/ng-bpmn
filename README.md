@@ -2,7 +2,7 @@
 
 Standalone BPMN components for your Angular applications.
 
-![ng-bpmn](./libs/ng-bpmn/docs/ng-bpmn-properties.png)
+![ng-bpmn](./libs/ng-bpmn/docs/ng-bpmn-minimap.png)
 
 ## Prerequisites
 
