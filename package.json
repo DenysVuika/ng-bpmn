@@ -27,6 +27,7 @@
     "bpmn-js-properties-panel": "^1.22.0",
     "diagram-js": "^12.0.2",
     "diagram-js-minimap": "^4.1.0",
+    "file-saver": "^2.0.5",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.0"
@@ -49,6 +50,7 @@
     "@nx/web": "16.1.1",
     "@nx/workspace": "16.1.1",
     "@schematics/angular": "~16.0.0",
+    "@types/file-saver": "^2.0.5",
     "@types/jest": "^29.4.0",
     "@types/node": "16.11.7",
     "@typescript-eslint/eslint-plugin": "^5.58.0",

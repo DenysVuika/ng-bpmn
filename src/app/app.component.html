@@ -1,4 +1,8 @@
-<ng-bpmn [url]="diagramUrl" [showProperties]="true" [showMinimap]="true" (importDone)="handleImported($event)" />
+<button (click)="saveXML(bpmn)">Save XML</button>
+<button (click)="saveSVG(bpmn)">Save SVG</button>
+<button (click)="showProperties = !showProperties">Toggle Properties</button>
+
+<ng-bpmn #bpmn [url]="diagramUrl" [showProperties]="showProperties" [showMinimap]="true" (importDone)="handleImported($event)" />
 
 <div class="import-error" *ngIf="importError">
   <strong>Failed to render diagram: </strong>

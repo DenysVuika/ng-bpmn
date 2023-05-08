@@ -124,6 +124,24 @@ export class NgBpmnComponent implements OnInit, OnChanges, OnDestroy {
       });
   }
 
+  async saveXML(): Promise<string | undefined> {
+    if (this.bpmnJS) {
+      const { xml } = await this.bpmnJS.saveXML({ format: true });
+      return xml;
+    } else {
+      return Promise.reject('Modeler not initialized');
+    }
+  }
+
+  async saveSVG(): Promise<string | undefined> {
+    if (this.bpmnJS) {
+      const { svg } = await this.bpmnJS.saveSVG();
+      return svg;
+    } else {
+      return Promise.reject('Modeler not initialized');
+    }
+  }
+
   private importDiagram(xml: string): Observable<{ warnings: Array<string> }> {
     if (this.bpmnJS) {
       return from(this.bpmnJS.importXML(xml));
