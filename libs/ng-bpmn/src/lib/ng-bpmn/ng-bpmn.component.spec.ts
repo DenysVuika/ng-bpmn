@@ -13,6 +13,12 @@ jest.mock('bpmn-js/lib/Modeler', () => {
   };
 });
 
+jest.mock('bpmn-js-properties-panel', () => {
+  return {
+    default: jest.fn()
+  };
+});
+
 describe('NgBpmnComponent', () => {
   let component: NgBpmnComponent;
   let fixture: ComponentFixture<NgBpmnComponent>;
