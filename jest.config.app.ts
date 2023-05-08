@@ -1,3 +1,5 @@
+const esModules = ['bpmn-js', 'diagram-js'];
+
 /* eslint-disable */
 export default {
   displayName: 'ng-bpmn-app',
@@ -13,7 +15,7 @@ export default {
       },
     ],
   },
-  transformIgnorePatterns: ['node_modules/(?!.*\\.mjs$)'],
+  transformIgnorePatterns: [`node_modules/(?!.*\\.mjs$|${esModules.join('|')})`],
   snapshotSerializers: [
     'jest-preset-angular/build/serializers/no-ng-attributes',
     'jest-preset-angular/build/serializers/ng-snapshot',
