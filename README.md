@@ -2,6 +2,8 @@
 
 Standalone BPMN components for your Angular applications.
 
+![ng-bpmn](./libs/ng-bpmn/docs/ng-bpmn-properties.png)
+
 ## Prerequisites
 
 - Angular 16.x (see also: [Angular Standalone Components](https://angular.io/guide/standalone-components))
