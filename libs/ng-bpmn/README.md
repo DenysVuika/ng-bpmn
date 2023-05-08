@@ -37,8 +37,12 @@ Update `angular.json` (or `project.json`) and setup additional styles:
 <ng-bpmn [url]="diagramUrl" />
 ```
 
-Showing Properties
+![default](./docs/ng-bpmn-default.png)
+
+## Properties Panel
 
 ```html
 <ng-bpmn [url]="diagramUrl" [showProperties]="true" />
 ```
+
+![properties panel](./docs/ng-bpmn-properties.png)
