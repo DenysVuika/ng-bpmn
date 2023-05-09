@@ -8,10 +8,11 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatTabsModule } from '@angular/material/tabs';
 
 @Component({
   standalone: true,
-  imports: [NgIf, RouterModule, NgBpmnComponent, MatButtonModule, MatToolbarModule, MatIconModule, MatTooltipModule, MatMenuModule],
+  imports: [NgIf, RouterModule, NgBpmnComponent, MatButtonModule, MatToolbarModule, MatIconModule, MatTooltipModule, MatMenuModule, MatTabsModule],
   selector: 'ng-bpmn-app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
@@ -22,7 +23,7 @@ export class AppComponent {
   importError?: Error;
   diagramUrl = 'https://cdn.staticaly.com/gh/bpmn-io/bpmn-js-examples/dfceecba/starter/diagram.bpmn';
 
-  showProperties = true;
+  showProperties = false;
 
   handleImported(event: ImportEvent) {
     const { type, error, warnings } = event;

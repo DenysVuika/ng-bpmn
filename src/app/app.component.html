@@ -18,7 +18,15 @@
   </button>
 </mat-toolbar>
 
-<ng-bpmn #bpmn [url]="diagramUrl" [showProperties]="showProperties" [showMinimap]="true" (importDone)="handleImported($event)" />
+<mat-tab-group animationDuration="0ms" [mat-stretch-tabs]="false">
+  <mat-tab label="Bpmn">
+    <ng-bpmn #bpmn [url]="diagramUrl" [showProperties]="showProperties" [showMinimap]="true" (importDone)="handleImported($event)" />
+  </mat-tab>
+  <mat-tab label="Dmn">Coming soon...</mat-tab>
+  <mat-tab label="Form">Coming soon...</mat-tab>
+</mat-tab-group>
+
+
 
 <div class="import-error" *ngIf="importError">
   <strong>Failed to render diagram: </strong>

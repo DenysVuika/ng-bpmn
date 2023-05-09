@@ -44,6 +44,7 @@ export class NgBpmnComponent implements OnInit, OnChanges, OnDestroy {
   @Input() url?: string;
   @Input() showProperties = false;
   @Input() showMinimap = false;
+  @Input() autoOpenMinimap = false;
 
   @ViewChild('canvas', { static: true })
   private canvas?: ElementRef;
@@ -75,7 +76,7 @@ export class NgBpmnComponent implements OnInit, OnChanges, OnDestroy {
       additionalModules
     });
 
-    if (this.showMinimap) {
+    if (this.showMinimap && this.autoOpenMinimap) {
       this.bpmnJS.get<any>('minimap').open();
     }
 
