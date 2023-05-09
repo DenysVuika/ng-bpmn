@@ -1,5 +1,5 @@
 import { NgIf } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ImportEvent, NgBpmnComponent } from '@denysvuika/ng-bpmn';
 import { saveAs } from 'file-saver';
@@ -14,7 +14,8 @@ import { MatMenuModule } from '@angular/material/menu';
   imports: [NgIf, RouterModule, NgBpmnComponent, MatButtonModule, MatToolbarModule, MatIconModule, MatTooltipModule, MatMenuModule],
   selector: 'ng-bpmn-app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class AppComponent {
   title = 'ng-bpmn-app';

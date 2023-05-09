@@ -11,3 +11,9 @@
 .example-spacer {
   flex: 1 1 auto;
 }
+
+ng-bpmn-app-root {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
