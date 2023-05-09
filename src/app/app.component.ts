@@ -4,10 +4,14 @@ import { RouterModule } from '@angular/router';
 import { ImportEvent, NgBpmnComponent } from '@denysvuika/ng-bpmn';
 import { saveAs } from 'file-saver';
 import { MatButtonModule } from '@angular/material/button';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatMenuModule } from '@angular/material/menu';
 
 @Component({
   standalone: true,
-  imports: [NgIf, RouterModule, NgBpmnComponent, MatButtonModule],
+  imports: [NgIf, RouterModule, NgBpmnComponent, MatButtonModule, MatToolbarModule, MatIconModule, MatTooltipModule, MatMenuModule],
   selector: 'ng-bpmn-app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
