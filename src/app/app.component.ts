@@ -3,10 +3,11 @@ import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ImportEvent, NgBpmnComponent } from '@denysvuika/ng-bpmn';
 import { saveAs } from 'file-saver';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   standalone: true,
-  imports: [NgIf, RouterModule, NgBpmnComponent],
+  imports: [NgIf, RouterModule, NgBpmnComponent, MatButtonModule],
   selector: 'ng-bpmn-app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']

@@ -1,6 +1,6 @@
-<button (click)="saveXML(bpmn)">Save XML</button>
-<button (click)="saveSVG(bpmn)">Save SVG</button>
-<button (click)="showProperties = !showProperties">Toggle Properties</button>
+<button mat-button (click)="saveXML(bpmn)">Save XML</button>
+<button mat-button (click)="saveSVG(bpmn)">Save SVG</button>
+<button mat-button (click)="showProperties = !showProperties">Toggle Properties</button>
 
 <ng-bpmn #bpmn [url]="diagramUrl" [showProperties]="showProperties" [showMinimap]="true" (importDone)="handleImported($event)" />
 
