@@ -17,3 +17,9 @@ jest.mock('bpmn-js-properties-panel', () => {
     default: jest.fn()
   };
 });
+
+jest.mock('@bpmn-io/add-exporter', () => {
+  return {
+    default: jest.fn()
+  };
+});

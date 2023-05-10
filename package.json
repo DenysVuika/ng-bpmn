@@ -24,6 +24,7 @@
     "@angular/platform-browser": "~16.0.0",
     "@angular/platform-browser-dynamic": "~16.0.0",
     "@angular/router": "~16.0.0",
+    "@bpmn-io/add-exporter": "^0.2.0",
     "@nx/angular": "16.1.1",
     "bpmn-js": "^13.0.4",
     "bpmn-js-properties-panel": "^1.22.0",

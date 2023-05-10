@@ -18,6 +18,7 @@ import BpmnModeler from 'bpmn-js/lib/Modeler';
 import Canvas from 'diagram-js/lib/core/Canvas';
 import { BpmnPropertiesPanelModule, BpmnPropertiesProviderModule } from 'bpmn-js-properties-panel';
 import MinimapModule from 'diagram-js-minimap';
+import AddExporter from '@bpmn-io/add-exporter';
 
 export interface ImportEvent {
   type: 'success' | 'error';
@@ -62,13 +63,21 @@ export class NgBpmnComponent implements OnInit, OnChanges, OnDestroy {
   // }
 
   ngOnInit(): void {
-    const additionalModules = [BpmnPropertiesPanelModule, BpmnPropertiesProviderModule];
+    const additionalModules = [
+      AddExporter,
+      BpmnPropertiesPanelModule,
+      BpmnPropertiesProviderModule
+    ];
 
     if (this.showMinimap) {
       additionalModules.push(MinimapModule);
     }
 
     this.bpmnJS = new BpmnModeler({
+      exporter: {
+        name: '@DenysVuika@ng-bpmn',
+        version: '1.0.0'
+      },
       container: this.canvas?.nativeElement,
       propertiesPanel: {
         parent: this.properties?.nativeElement
