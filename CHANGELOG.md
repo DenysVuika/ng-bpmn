@@ -14,6 +14,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - ng-bpmn: keyboard support, `hotkeys` property to enable default keyboard combinations (see component README for more details)
 - app: Improved demo application, using Angular Material components
 
+### Changed
+
+- ng-bpmn: make `url` a required input property
+
 ## [0.0.2] - 2023-05-09
 
 ### Added

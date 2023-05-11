@@ -49,7 +49,7 @@ interface ImportCallback {
 export class NgBpmnComponent extends ModelerComponent implements Modeler, OnInit, OnChanges, OnDestroy {
   private bpmnJS?: BpmnModeler;
 
-  @Input() url?: string;
+  @Input({ required: true }) url?: string;
   @Input() showProperties = false;
   @Input() showMinimap = false;
   @Input() autoOpenMinimap = false;
@@ -63,6 +63,9 @@ export class NgBpmnComponent extends ModelerComponent implements Modeler, OnInit
 
   @Output()
   importDone = new EventEmitter<ImportEvent>();
+
+  @Output()
+  changed = new EventEmitter<string>();
 
   constructor(private http: HttpClient) {
     super();
