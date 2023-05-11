@@ -38,7 +38,7 @@ Update `angular.json` (or `project.json`) and setup additional styles:
 <ng-bpmn [url]="diagramUrl" />
 ```
 
-![default](./docs/ng-bpmn-default.png)
+![default](https://github.com/DenysVuika/ng-bpmn/blob/main/libs/ng-bpmn/docs/ng-bpmn-default.png?raw=true)
 
 ### Keyboard Hotkeys
 
@@ -104,7 +104,7 @@ export class AppComponent {
 <ng-bpmn [url]="diagramUrl" [showProperties]="true" />
 ```
 
-![properties panel](./docs/ng-bpmn-properties.png)
+![properties panel](https://github.com/DenysVuika/ng-bpmn/blob/main/libs/ng-bpmn/docs/ng-bpmn-properties.png?raw=true)
 
 ### Minimap
 
@@ -112,4 +112,4 @@ export class AppComponent {
 <ng-bpmn [url]="diagramUrl" [showProperties]="true" [showMinimap]="true" />
 ```
 
-![minimap](./docs/ng-bpmn-minimap.png)
+![minimap](https://github.com/DenysVuika/ng-bpmn/blob/main/libs/ng-bpmn/docs/ng-bpmn-minimap.png?raw=true)
