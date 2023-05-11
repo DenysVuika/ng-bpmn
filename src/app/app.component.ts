@@ -1,7 +1,7 @@
 import { NgIf } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { ImportEvent, NgBpmnComponent } from '@denysvuika/ng-bpmn';
+import { DiagramChangedEvent, ImportEvent, NgBpmnComponent } from '@denysvuika/ng-bpmn';
 import { saveAs } from 'file-saver';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -55,5 +55,9 @@ export class AppComponent {
         saveAs(blob, 'diagram.svg');
       }
     });
+  }
+
+  onChanged($event: DiagramChangedEvent) {
+    console.log($event.xml);
   }
 }

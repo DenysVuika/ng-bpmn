@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - ng-bpmn: `autoOpenMinimap` property to automatically open the Minimap (requires `showMinimap` to be `true`)
 - ng-bpmn: add custom diagram exporter metadata
 - ng-bpmn: keyboard support, `hotkeys` property to enable default keyboard combinations (see component README for more details)
+- ng-bpmn: `changed` event to track diagram changes and access the XML content (debounced)
 - app: Improved demo application, using Angular Material components
 
 ### Changed

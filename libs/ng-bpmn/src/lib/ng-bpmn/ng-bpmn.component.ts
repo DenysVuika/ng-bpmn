@@ -26,10 +26,16 @@ import { ModelerActions } from '../core/modeling/ModelerActions';
 import DiagramActionsModule from '../core/modeling/DiagramActionsModule';
 import BpmnActionsModule from '../core/modeling/BpmnActionsModule';
 import { DiagramMinimap } from '../core/modeling/DiagramMinimap';
+import { debounce } from '../utils/debounce';
 
 export interface ImportEvent {
   type: 'success' | 'error';
   warnings?: string[];
+  error?: Error;
+}
+
+export interface DiagramChangedEvent {
+  xml?: string;
   error?: Error;
 }
 
@@ -65,7 +71,7 @@ export class NgBpmnComponent extends ModelerComponent implements Modeler, OnInit
   importDone = new EventEmitter<ImportEvent>();
 
   @Output()
-  changed = new EventEmitter<string>();
+  changed = new EventEmitter<DiagramChangedEvent>();
 
   constructor(private http: HttpClient) {
     super();
@@ -84,7 +90,7 @@ export class NgBpmnComponent extends ModelerComponent implements Modeler, OnInit
       additionalModules.push(MinimapModule);
     }
 
-    this.bpmnJS = new BpmnModeler({
+    const modeler = new BpmnModeler({
       exporter: {
         name: '@DenysVuika@ng-bpmn',
         version: '1.0.0'
@@ -96,22 +102,38 @@ export class NgBpmnComponent extends ModelerComponent implements Modeler, OnInit
       additionalModules
     });
 
-    this.editorActions = this.bpmnJS.get<EditorActions>('editorActions');
+    this.editorActions = modeler.get<EditorActions>('editorActions');
 
     if (this.hotkeys) {
       this.bindHotkeys();
     }
 
     if (this.showMinimap && this.autoOpenMinimap) {
-      this.bpmnJS.get<DiagramMinimap>('minimap').open();
+      modeler.get<DiagramMinimap>('minimap').open();
     }
 
-    this.bpmnJS.on('import.done', ({ error }: ImportCallback) => {
+    modeler.on('import.done', ({ error }: ImportCallback) => {
       if (!error && this.bpmnJS) {
         const canvas = this.bpmnJS.get<Canvas>('canvas');
         canvas.zoom('fit-viewport');
       }
     });
+
+    const onChanged = debounce(async () => {
+      try {
+        const content = await this.bpmnJS?.saveXML();
+        if (content) {
+          this.changed.next(content);
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    });
+
+    modeler.on('commandStack.changed', onChanged);
+    modeler.on('import.done', onChanged);
+
+    this.bpmnJS = modeler;
 
     if (this.url) {
       this.loadUrl(this.url);

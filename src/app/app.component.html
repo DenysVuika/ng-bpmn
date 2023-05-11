@@ -25,7 +25,8 @@
       [showProperties]="showProperties"
       [showMinimap]="true"
       [hotkeys]="true"
-      (importDone)="handleImported($event)" />
+      (importDone)="handleImported($event)"
+      (changed)="onChanged($event)" />
   </mat-tab>
   <mat-tab label="Dmn">Coming soon...</mat-tab>
   <mat-tab label="Form">Coming soon...</mat-tab>
