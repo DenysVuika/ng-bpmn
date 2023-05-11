@@ -20,7 +20,12 @@
 
 <mat-tab-group animationDuration="0ms" [mat-stretch-tabs]="false">
   <mat-tab label="Bpmn">
-    <ng-bpmn #bpmn [url]="diagramUrl" [showProperties]="showProperties" [showMinimap]="true" (importDone)="handleImported($event)" />
+    <ng-bpmn #bpmn
+      [url]="diagramUrl"
+      [showProperties]="showProperties"
+      [showMinimap]="true"
+      [hotkeys]="true"
+      (importDone)="handleImported($event)" />
   </mat-tab>
   <mat-tab label="Dmn">Coming soon...</mat-tab>
   <mat-tab label="Form">Coming soon...</mat-tab>

@@ -19,6 +19,13 @@ import Canvas from 'diagram-js/lib/core/Canvas';
 import { BpmnPropertiesPanelModule, BpmnPropertiesProviderModule } from 'bpmn-js-properties-panel';
 import MinimapModule from 'diagram-js-minimap';
 import AddExporter from '@bpmn-io/add-exporter';
+import { EditorActions } from '../core/modeling/EditorActions';
+import { Modeler } from '../core/Modeler';
+import { ModelerComponent } from '../core/ModelerComponent';
+import { ModelerActions } from '../core/modeling/ModelerActions';
+import DiagramActionsModule from '../core/modeling/DiagramActionsModule';
+import BpmnActionsModule from '../core/modeling/BpmnActionsModule';
+import { DiagramMinimap } from '../core/modeling/DiagramMinimap';
 
 export interface ImportEvent {
   type: 'success' | 'error';
@@ -39,13 +46,14 @@ interface ImportCallback {
   styleUrls: ['./ng-bpmn.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class NgBpmnComponent implements OnInit, OnChanges, OnDestroy {
+export class NgBpmnComponent extends ModelerComponent implements Modeler, OnInit, OnChanges, OnDestroy {
   private bpmnJS?: BpmnModeler;
 
   @Input() url?: string;
   @Input() showProperties = false;
   @Input() showMinimap = false;
   @Input() autoOpenMinimap = false;
+  @Input() hotkeys = false;
 
   @ViewChild('canvas', { static: true })
   private canvas?: ElementRef;
@@ -56,17 +64,17 @@ export class NgBpmnComponent implements OnInit, OnChanges, OnDestroy {
   @Output()
   importDone = new EventEmitter<ImportEvent>();
 
-  constructor(private http: HttpClient) {}
-
-  // ngAfterContentInit(): void {
-  //   this.bpmnJS.attachTo(this.canvas?.nativeElement);
-  // }
+  constructor(private http: HttpClient) {
+    super();
+  }
 
   ngOnInit(): void {
     const additionalModules = [
       AddExporter,
       BpmnPropertiesPanelModule,
-      BpmnPropertiesProviderModule
+      BpmnPropertiesProviderModule,
+      DiagramActionsModule,
+      BpmnActionsModule,
     ];
 
     if (this.showMinimap) {
@@ -85,8 +93,14 @@ export class NgBpmnComponent implements OnInit, OnChanges, OnDestroy {
       additionalModules
     });
 
+    this.editorActions = this.bpmnJS.get<EditorActions>('editorActions');
+
+    if (this.hotkeys) {
+      this.bindHotkeys();
+    }
+
     if (this.showMinimap && this.autoOpenMinimap) {
-      this.bpmnJS.get<any>('minimap').open();
+      this.bpmnJS.get<DiagramMinimap>('minimap').open();
     }
 
     this.bpmnJS.on('import.done', ({ error }: ImportCallback) => {
@@ -108,6 +122,9 @@ export class NgBpmnComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    if (this.hotkeys) {
+      this.unbindHotkeys();
+    }
     this.bpmnJS?.destroy();
   }
 
@@ -158,5 +175,34 @@ export class NgBpmnComponent implements OnInit, OnChanges, OnDestroy {
     } else {
       return of({ warnings: [] });
     }
+  }
+
+  protected override bindHotkeys() {
+    console.log('Binding BPMN hotkeys');
+
+    super.bindHotkeys({
+      'ctrl+a, command+a': ModelerActions.selectElements,
+      e: ModelerActions.directEditing,
+      h: ModelerActions.handTool,
+      l: ModelerActions.lassoTool,
+      s: ModelerActions.spaceTool,
+      'ctrl+=, command+=': ModelerActions.zoomIn,
+      'ctrl+-, command+-': ModelerActions.zoomOut,
+      'ctrl+0, command+0': ModelerActions.resetZoom,
+      'ctrl+9, command+9': ModelerActions.zoomToFit,
+      'ctrl+z, command+z': ModelerActions.undo,
+      'ctrl+shift+z, command+shift+z': ModelerActions.redo,
+      Backspace: ModelerActions.removeSelection,
+      'ctrl+c, command+c': ModelerActions.copy,
+      c: ModelerActions.globalConnectTool,
+      'ctrl+v, command+v': ModelerActions.paste,
+      'ctrl+x, command+x': ModelerActions.cut,
+      'ctrl+f, command+f': ModelerActions.find,
+    });
+  }
+
+  protected override unbindHotkeys() {
+    console.log('Unbinding BPMN hotkeys');
+    super.unbindHotkeys();
   }
 }

@@ -5,6 +5,7 @@ jest.mock('bpmn-js/lib/Modeler', () => {
     default: jest.fn().mockImplementation(() => {
       return {
         on: jest.fn(),
+        get: jest.fn(),
         attachTo: jest.fn(),
         destroy: jest.fn()
       };

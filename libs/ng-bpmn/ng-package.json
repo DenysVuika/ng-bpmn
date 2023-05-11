@@ -10,6 +10,7 @@
     "diagram-js",
     "bpmn-js-properties-panel",
     "diagram-js-minimap",
-    "@bpmn-io/add-exporter"
+    "@bpmn-io/add-exporter",
+    "hotkeys-js"
   ]
 }
