@@ -32,8 +32,6 @@ import { MatTabsModule } from '@angular/material/tabs';
 export class AppComponent {
   title = 'ng-bpmn-app';
   importError?: Error;
-  diagramUrl = 'https://cdn.staticaly.com/gh/bpmn-io/bpmn-js-examples/dfceecba/starter/diagram.bpmn';
-
   showProperties = false;
 
   handleImported(event: ImportEvent) {
