@@ -1,7 +1,7 @@
 import { NgIf } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { DiagramChangedEvent, ImportEvent, NgBpmnComponent } from '@denysvuika/ng-bpmn';
+import { DiagramChangedEvent, ImportEvent, NgBpmnComponent, NgDmnComponent } from '@denysvuika/ng-bpmn';
 import { saveAs } from 'file-saver';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -12,7 +12,18 @@ import { MatTabsModule } from '@angular/material/tabs';
 
 @Component({
   standalone: true,
-  imports: [NgIf, RouterModule, NgBpmnComponent, MatButtonModule, MatToolbarModule, MatIconModule, MatTooltipModule, MatMenuModule, MatTabsModule],
+  imports: [
+    NgIf,
+    RouterModule,
+    NgBpmnComponent,
+    NgDmnComponent,
+    MatButtonModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatTooltipModule,
+    MatMenuModule,
+    MatTabsModule
+  ],
   selector: 'ng-bpmn-app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
@@ -58,6 +69,6 @@ export class AppComponent {
   }
 
   onChanged($event: DiagramChangedEvent) {
-    console.log($event.xml);
+    // console.log($event.xml);
   }
 }

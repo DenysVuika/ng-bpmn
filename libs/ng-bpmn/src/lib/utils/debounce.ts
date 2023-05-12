@@ -1,5 +1,5 @@
 export function debounce(fn: (...args: any[]) => void, timeout = 500) {
-  let timer: number;
+  let timer: any;
 
   return function (...args: any[]) {
     if (timer) {

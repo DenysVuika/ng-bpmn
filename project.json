@@ -18,12 +18,6 @@
         "assets": ["./src/favicon.ico", "./src/assets"],
         "styles": [
           "@angular/material/prebuilt-themes/indigo-pink.css",
-          "node_modules/bpmn-js/dist/assets/diagram-js.css",
-          "node_modules/bpmn-js/dist/assets/bpmn-js.css",
-          "node_modules/bpmn-js/dist/assets/bpmn-font/css/bpmn.css",
-          "node_modules/bpmn-js-properties-panel/dist/assets/properties-panel.css",
-          "node_modules/bpmn-js-properties-panel/dist/assets/element-templates.css",
-          "node_modules/diagram-js-minimap/assets/diagram-js-minimap.css",
           "./src/styles.scss"
         ],
         "scripts": []

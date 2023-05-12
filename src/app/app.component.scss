@@ -19,9 +19,14 @@ ng-bpmn-app-root {
 
   mat-tab-group {
     height: 100%;
-  }
 
-  .mat-mdc-tab-body-wrapper {
-    flex-grow: 1;
+    .mat-mdc-tab-body-wrapper {
+      flex-grow: 1;
+    }
+
+    .mat-mdc-tab-body-content {
+      display: flex;
+      flex-direction: column;
+    }
   }
 }

@@ -24,3 +24,19 @@ jest.mock('@bpmn-io/add-exporter', () => {
     default: jest.fn()
   };
 });
+
+jest.mock('dmn-js/lib/Modeler', () => {
+  return {
+    default: jest.fn().mockImplementation(() => {
+      return {
+        destroy: jest.fn()
+      };
+    })
+  };
+});
+
+jest.mock('dmn-js-properties-panel', () => {
+  return {
+    default: jest.fn()
+  };
+});

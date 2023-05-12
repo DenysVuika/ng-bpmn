@@ -30,6 +30,8 @@
     "bpmn-js-properties-panel": "^1.22.0",
     "diagram-js": "^12.0.2",
     "diagram-js-minimap": "^4.1.0",
+    "dmn-js": "^14.1.5",
+    "dmn-js-properties-panel": "^1.3.2",
     "file-saver": "^2.0.5",
     "hotkeys-js": "^3.10.2",
     "rxjs": "~7.8.0",

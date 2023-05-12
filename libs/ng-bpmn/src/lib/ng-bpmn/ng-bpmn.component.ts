@@ -27,12 +27,8 @@ import DiagramActionsModule from '../core/modeling/DiagramActionsModule';
 import BpmnActionsModule from '../core/modeling/BpmnActionsModule';
 import { DiagramMinimap } from '../core/modeling/DiagramMinimap';
 import { debounce } from '../utils/debounce';
-
-export interface ImportEvent {
-  type: 'success' | 'error';
-  warnings?: string[];
-  error?: Error;
-}
+import { ImportEvent } from '../core/ImportEvent';
+import { exporter } from '../core/exporter';
 
 export interface DiagramChangedEvent {
   xml?: string;
@@ -77,6 +73,10 @@ export class NgBpmnComponent extends ModelerComponent implements Modeler, OnInit
     super();
   }
 
+  get editorActions(): EditorActions | undefined {
+    return this.bpmnJS?.get<EditorActions>('editorActions');
+  }
+
   ngOnInit(): void {
     const additionalModules = [
       AddExporter,
@@ -91,18 +91,13 @@ export class NgBpmnComponent extends ModelerComponent implements Modeler, OnInit
     }
 
     const modeler = new BpmnModeler({
-      exporter: {
-        name: '@DenysVuika@ng-bpmn',
-        version: '1.0.0'
-      },
+      exporter,
       container: this.canvas?.nativeElement,
       propertiesPanel: {
         parent: this.properties?.nativeElement
       },
       additionalModules
     });
-
-    this.editorActions = modeler.get<EditorActions>('editorActions');
 
     if (this.hotkeys) {
       this.bindHotkeys();

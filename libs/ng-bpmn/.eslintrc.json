@@ -17,7 +17,7 @@
           "error",
           {
             "type": "element",
-            "prefix": "ng-bpmn",
+            "prefix": "ng",
             "style": "kebab-case"
           }
         ]

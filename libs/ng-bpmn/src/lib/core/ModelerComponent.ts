@@ -4,15 +4,17 @@ import { ModelerActions } from './modeling/ModelerActions';
 
 export abstract class ModelerComponent {
   private hotkeyBindings: string[] = [];
-  private _editorActions?: EditorActions;
+  // private _editorActions?: EditorActions;
 
-  get editorActions(): EditorActions | undefined {
-    return this._editorActions;
-  }
+  // get editorActions(): EditorActions | undefined {
+  //   return this._editorActions;
+  // }
 
-  protected set editorActions(value: EditorActions | undefined) {
-    this._editorActions = value;
-  }
+  // protected set editorActions(value: EditorActions | undefined) {
+  //   this._editorActions = value;
+  // }
+
+  abstract get editorActions(): EditorActions | undefined;
 
   supportsAction(action: string): boolean {
     if (this.editorActions) {

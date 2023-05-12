@@ -16,7 +16,7 @@ jobs:
       - run: npm ci
       - run: npx nx lint ng-bpmn
       - run: npx nx test ng-bpmn
-      - run: npx nx release ng-bpmn
+      - run: npx nx build ng-bpmn
 
   publish:
     needs: build
@@ -29,7 +29,7 @@ jobs:
           cache: 'npm'
           registry-url: https://registry.npmjs.org/
       - run: npm ci
-      - run: npx nx release ng-bpmn
+      - run: npx nx build ng-bpmn
       - run: cd dist/libs/ng-bpmn && npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
