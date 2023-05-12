@@ -1,39 +1,43 @@
 <mat-tab-group animationDuration="0ms" [mat-stretch-tabs]="false">
   <mat-tab label="BPMN">
+    <ng-template matTabContent>
+      <mat-toolbar>
+        <button mat-icon-button>
+          <mat-icon>menu</mat-icon>
+        </button>
+        <span>ng-bpmn</span>
+        <span class="example-spacer"></span>
 
-    <mat-toolbar>
-      <button mat-icon-button>
-        <mat-icon>menu</mat-icon>
-      </button>
-      <span>ng-bpmn</span>
-      <span class="example-spacer"></span>
+        <button mat-icon-button [matMenuTriggerFor]="menu" matTooltip="Download diagram">
+          <mat-icon fontSet="material-icons-outlined">cloud_download</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="saveXML(bpmn)">Save XML</button>
+          <button mat-menu-item (click)="saveSVG(bpmn)">Save SVG</button>
+        </mat-menu>
 
-      <button mat-icon-button [matMenuTriggerFor]="menu" matTooltip="Download diagram">
-        <mat-icon fontSet="material-icons-outlined">cloud_download</mat-icon>
-      </button>
-      <mat-menu #menu="matMenu">
-        <button mat-menu-item (click)="saveXML(bpmn)">Save XML</button>
-        <button mat-menu-item (click)="saveSVG(bpmn)">Save SVG</button>
-      </mat-menu>
+        <button mat-icon-button matTooltip="Toggle Properties" (click)="showProperties = !showProperties">
+          <mat-icon fontSet="material-icons-outlined">wysiwyg</mat-icon>
+        </button>
+      </mat-toolbar>
 
-      <button mat-icon-button matTooltip="Toggle Properties" (click)="showProperties = !showProperties">
-        <mat-icon fontSet="material-icons-outlined">wysiwyg</mat-icon>
-      </button>
-    </mat-toolbar>
-
-    <ng-bpmn #bpmn
-      [url]="diagramUrl"
-      [showProperties]="showProperties"
-      [showMinimap]="true"
-      [hotkeys]="true"
-      (importDone)="handleImported($event)"
-      (changed)="onChanged($event)" />
+      <ng-bpmn #bpmn
+        [url]="diagramUrl"
+        [showProperties]="showProperties"
+        [showMinimap]="true"
+        [hotkeys]="true"
+        (importDone)="handleImported($event)"
+        (changed)="onChanged($event)" />
+    </ng-template>
   </mat-tab>
 
   <mat-tab label="DMN">
-    <ng-dmn
-      [url]="'/assets/diagram.dmn'"
-      [showProperties]="showProperties" />
+    <ng-template matTabContent>
+      <ng-dmn
+        [url]="'/assets/diagram.dmn'"
+        [showProperties]="showProperties"
+        [hotkeys]="true" />
+    </ng-template>
   </mat-tab>
 
   <mat-tab label="CMMN">Coming soon...</mat-tab>

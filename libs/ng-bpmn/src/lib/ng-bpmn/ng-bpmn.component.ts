@@ -78,13 +78,7 @@ export class NgBpmnComponent extends ModelerComponent implements Modeler, OnInit
   }
 
   ngOnInit(): void {
-    const additionalModules = [
-      AddExporter,
-      BpmnPropertiesPanelModule,
-      BpmnPropertiesProviderModule,
-      DiagramActionsModule,
-      BpmnActionsModule,
-    ];
+    const additionalModules = [AddExporter, BpmnPropertiesPanelModule, BpmnPropertiesProviderModule, DiagramActionsModule, BpmnActionsModule];
 
     if (this.showMinimap) {
       additionalModules.push(MinimapModule);
@@ -98,10 +92,6 @@ export class NgBpmnComponent extends ModelerComponent implements Modeler, OnInit
       },
       additionalModules
     });
-
-    if (this.hotkeys) {
-      this.bindHotkeys();
-    }
 
     if (this.showMinimap && this.autoOpenMinimap) {
       modeler.get<DiagramMinimap>('minimap').open();
@@ -148,6 +138,12 @@ export class NgBpmnComponent extends ModelerComponent implements Modeler, OnInit
     this.bpmnJS?.destroy();
   }
 
+  private onLoad() {
+    if (this.hotkeys) {
+      this.bindHotkeys();
+    }
+  }
+
   loadUrl(url: string): Subscription {
     return this.http
       .get(url, { responseType: 'text' })
@@ -161,6 +157,8 @@ export class NgBpmnComponent extends ModelerComponent implements Modeler, OnInit
             type: 'success',
             warnings
           });
+
+          this.onLoad();
         },
         error: (err: HttpErrorResponse) => {
           this.importDone.emit({
@@ -217,7 +215,7 @@ export class NgBpmnComponent extends ModelerComponent implements Modeler, OnInit
       c: ModelerActions.globalConnectTool,
       'ctrl+v, command+v': ModelerActions.paste,
       'ctrl+x, command+x': ModelerActions.cut,
-      'ctrl+f, command+f': ModelerActions.find,
+      'ctrl+f, command+f': ModelerActions.find
     });
   }
 

@@ -4,15 +4,6 @@ import { ModelerActions } from './modeling/ModelerActions';
 
 export abstract class ModelerComponent {
   private hotkeyBindings: string[] = [];
-  // private _editorActions?: EditorActions;
-
-  // get editorActions(): EditorActions | undefined {
-  //   return this._editorActions;
-  // }
-
-  // protected set editorActions(value: EditorActions | undefined) {
-  //   this._editorActions = value;
-  // }
 
   abstract get editorActions(): EditorActions | undefined;
 
@@ -37,6 +28,8 @@ export abstract class ModelerComponent {
           this.triggerAction(action);
         });
         this.hotkeyBindings.push(key);
+      } else {
+        console.log('Action not supported', action);
       }
     }
   }

@@ -10,7 +10,7 @@
   "scripts": {
     "start": "nx serve",
     "build": "nx build",
-    "test": "nx test"
+    "test": "nx run-many --all --target=test"
   },
   "private": true,
   "dependencies": {

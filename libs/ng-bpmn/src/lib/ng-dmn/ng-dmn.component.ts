@@ -11,6 +11,7 @@ import { exporter } from '../core/exporter';
 import DiagramActionsModule from '../core/modeling/DiagramActionsModule';
 import DmnActionsModule from '../core/modeling/DmnActionsModule';
 import { EditorActions } from '../core/modeling/EditorActions';
+import { ModelerActions } from '../core/modeling/ModelerActions';
 
 export type DmnViewType = 'drd' | 'decisionTable' | 'literalExpression';
 
@@ -39,6 +40,7 @@ export class NgDmnComponent extends ModelerComponent implements Modeler, OnInit,
 
   @Input({ required: true }) url?: string;
   @Input() showProperties = false;
+  @Input() hotkeys = false;
 
   @ViewChild('canvas', { static: true })
   private canvas?: ElementRef;
@@ -59,15 +61,10 @@ export class NgDmnComponent extends ModelerComponent implements Modeler, OnInit,
       exporter,
       drd: {
         propertiesPanel: {
-          parent: this.properties?.nativeElement,
+          parent: this.properties?.nativeElement
         },
-        additionalModules: [
-          DmnPropertiesPanelModule,
-          DmnPropertiesProviderModule,
-          DiagramActionsModule,
-          DmnActionsModule
-        ],
-      },
+        additionalModules: [DmnPropertiesPanelModule, DmnPropertiesProviderModule, DiagramActionsModule, DmnActionsModule]
+      }
     });
 
     // this.dmnJS.on('views.changed', ({ activeView }: ViewsChangedEvent) => {
@@ -95,6 +92,9 @@ export class NgDmnComponent extends ModelerComponent implements Modeler, OnInit,
   }
 
   ngOnDestroy(): void {
+    if (this.hotkeys) {
+      this.unbindHotkeys();
+    }
     this.dmnJS?.destroy();
   }
 
@@ -114,6 +114,12 @@ export class NgDmnComponent extends ModelerComponent implements Modeler, OnInit,
     return this.dmnJS?.getActiveViewer()?.get('editorActions');
   }
 
+  private onLoad() {
+    if (this.hotkeys) {
+      this.bindHotkeys();
+    }
+  }
+
   loadUrl(url: string): Subscription {
     return this.http
       .get(url, { responseType: 'text' })
@@ -127,6 +133,17 @@ export class NgDmnComponent extends ModelerComponent implements Modeler, OnInit,
             type: 'success',
             warnings
           });
+
+          this.onLoad();
+
+          /*
+          const activeView = this.getActiveView();
+          if (activeView.type === 'drd') {
+            const activeEditor = this.dmnJS.getActiveViewer();
+            const canvas = activeEditor.get('canvas');
+            canvas.zoom('fit-viewport');
+          }
+          */
         },
         error: (err: HttpErrorResponse) => {
           this.importDone.emit({
@@ -161,5 +178,27 @@ export class NgDmnComponent extends ModelerComponent implements Modeler, OnInit,
     } else {
       return of({ warnings: [] });
     }
+  }
+
+  protected override bindHotkeys() {
+    console.log('Binding DMN hotkeys');
+
+    super.bindHotkeys({
+      'ctrl+a, command+a': ModelerActions.selectElements,
+      e: ModelerActions.directEditing,
+      l: ModelerActions.lassoTool,
+      'ctrl+=, command+=': ModelerActions.zoomIn,
+      'ctrl+-, command+-': ModelerActions.zoomOut,
+      'ctrl+0, command+0': ModelerActions.resetZoom,
+      'ctrl+9, command+9': ModelerActions.zoomToFit,
+      'ctrl+z, command+z': ModelerActions.undo,
+      'ctrl+shift+z, command+shift+z': ModelerActions.redo,
+      Backspace: ModelerActions.removeSelection
+    });
+  }
+
+  protected override unbindHotkeys() {
+    console.log('Unbinding DMN hotkeys');
+    super.unbindHotkeys();
   }
 }
