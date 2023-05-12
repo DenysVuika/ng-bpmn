@@ -91,3 +91,37 @@ export class AppComponent {
 ```
 
 ![minimap](https://github.com/DenysVuika/ng-bpmn/blob/main/libs/ng-bpmn/docs/ng-bpmn-minimap.png?raw=true)
+
+## CMN
+
+```html
+<ng-cmn [url]="diagramUrl" />
+```
+
+### Properties Panel
+
+```html
+<ng-bpmn [url]="diagramUrl" [showProperties]="true" />
+```
+
+### Keyboard Hotkeys
+
+```html
+<ng-bpmn [url]="diagramUrl" [hotkeys]="true" />
+```
+
+Supported hotkeys:
+
+| Keys | MacOS | Action |
+| --- | --- | --- |
+| `Ctrl`+`a` | `Command`+`a` | select all |
+| `e` | `e` | direct editing |
+| `h` | `h` | hand tool |
+| `l` | `l` | lasso tool |
+| `Ctrl`+`=` | `Command`+`=` | zoom in |
+| `Ctrl`+`-` | `Command`+`-` | zoom out |
+| `Ctrl`+`0` | `Command`+`0` | reset zoom |
+| `Ctrl`+`9` | `Command`+`9` | zoom to fit |
+| `Ctrl`+`z` | `Command`+`z` | undo |
+| `Ctrl`+`Shift`+`z` | `Command`+`Shift`+`z` | redo |
+| `Backspace` | `Backspace` | remove selection |
