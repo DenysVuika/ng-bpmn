@@ -1,0 +1,13 @@
+<mat-toolbar>
+  <button mat-icon-button [matMenuTriggerFor]="menu" matTooltip="Download diagram">
+    <mat-icon fontSet="material-icons-outlined">cloud_download</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="saveXML(modeler)">Save XML</button>
+    <button mat-menu-item (click)="saveSVG(modeler)">Save SVG</button>
+  </mat-menu>
+
+  <button mat-icon-button matTooltip="Toggle Properties" (click)="modeler?.toggleProperties()">
+    <mat-icon fontSet="material-icons-outlined">wysiwyg</mat-icon>
+  </button>
+</mat-toolbar>

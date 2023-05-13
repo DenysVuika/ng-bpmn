@@ -1,29 +1,13 @@
 import { NgIf } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { DiagramChangedEvent, ImportEvent, Modeler, NgBpmnComponent, NgDmnComponent } from '@denysvuika/ng-bpmn';
-import { saveAs } from 'file-saver';
-import { MatButtonModule } from '@angular/material/button';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatIconModule } from '@angular/material/icon';
-import { MatTooltipModule } from '@angular/material/tooltip';
-import { MatMenuModule } from '@angular/material/menu';
+import { DiagramChangedEvent, ImportEvent, NgBpmnComponent, NgDmnComponent } from '@denysvuika/ng-bpmn';
 import { MatTabsModule } from '@angular/material/tabs';
+import { AppToolbarComponent } from './toolbar/toolbar.component';
 
 @Component({
   standalone: true,
-  imports: [
-    NgIf,
-    RouterModule,
-    NgBpmnComponent,
-    NgDmnComponent,
-    MatButtonModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatTooltipModule,
-    MatMenuModule,
-    MatTabsModule
-  ],
+  imports: [NgIf, RouterModule, NgBpmnComponent, AppToolbarComponent, NgDmnComponent, MatTabsModule],
   selector: 'ng-bpmn-app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
@@ -45,22 +29,6 @@ export class AppComponent {
     }
 
     this.importError = error;
-  }
-
-  async saveXML(modeler: Modeler) {
-    const content = await modeler.saveSVG();
-    if (content) {
-      const blob = new Blob([content]);
-      saveAs(blob, 'diagram.xml');
-    }
-  }
-
-  async saveSVG(modeler: Modeler) {
-    const content = await modeler.saveSVG();
-    if (content) {
-      const blob = new Blob([content], { type: 'image/svg+xml' });
-      saveAs(blob, 'diagram.svg');
-    }
   }
 
   onChanged($event: DiagramChangedEvent) {

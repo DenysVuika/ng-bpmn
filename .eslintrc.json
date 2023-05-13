@@ -20,7 +20,7 @@
           "error",
           {
             "type": "element",
-            "prefix": "ng-bpmn-app",
+            "prefix": ["ng-bpmn-app", "app"],
             "style": "kebab-case"
           }
         ]

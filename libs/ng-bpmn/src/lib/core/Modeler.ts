@@ -4,4 +4,5 @@ export interface Modeler {
 
   supportsAction(action: string): boolean;
   triggerAction(action: string, params?: any): any;
+  toggleProperties(): void;
 }
