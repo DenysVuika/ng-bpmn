@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule, HttpErrorResponse } from '@angular/common/http';
-import { Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, ViewChild, ViewEncapsulation } from '@angular/core';
 import DmnModeler from 'dmn-js/lib/Modeler';
 import { DmnPropertiesPanelModule, DmnPropertiesProviderModule } from 'dmn-js-properties-panel';
 import { ModelerComponent } from '../core/ModelerComponent';
@@ -12,6 +12,7 @@ import DiagramActionsModule from '../core/modeling/DiagramActionsModule';
 import DmnActionsModule from '../core/modeling/DmnActionsModule';
 import { EditorActions } from '../core/modeling/EditorActions';
 import { ModelerActions } from '../core/modeling/ModelerActions';
+import AddExporter from '@bpmn-io/add-exporter';
 
 export type DmnViewType = 'drd' | 'decisionTable' | 'literalExpression';
 
@@ -35,7 +36,7 @@ export interface DmnView {
   styleUrls: ['./ng-dmn.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class NgDmnComponent extends ModelerComponent implements Modeler, OnInit, OnDestroy {
+export class NgDmnComponent extends ModelerComponent implements Modeler, OnInit, OnDestroy, OnChanges {
   private dmnJS?: DmnModeler;
 
   @Input({ required: true }) url?: string;
@@ -85,9 +86,11 @@ export class NgDmnComponent extends ModelerComponent implements Modeler, OnInit,
       // }
     });
     */
+  }
 
-    if (this.url) {
-      this.loadUrl(this.url);
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['url']) {
+      this.loadUrl(changes['url'].currentValue);
     }
   }
 
@@ -154,10 +157,9 @@ export class NgDmnComponent extends ModelerComponent implements Modeler, OnInit,
       });
   }
 
-  async saveXML(): Promise<string | undefined> {
+  async saveXML(): Promise<string> {
     if (this.dmnJS) {
-      const viewer = this.dmnJS.getActiveViewer();
-      const { xml } = await viewer.saveXML({ format: true });
+      const { xml } = await this.dmnJS.saveXML({ format: true });
       return xml;
     } else {
       return Promise.reject('Modeler not initialized');
@@ -166,9 +168,16 @@ export class NgDmnComponent extends ModelerComponent implements Modeler, OnInit,
 
   async saveSVG(): Promise<string | undefined> {
     if (this.dmnJS) {
-      const viewer = this.dmnJS.getActiveViewer();
-      const { svg } = await viewer.saveSVG();
-      return svg;
+      const activeView = this.getActiveView();
+
+      if (activeView && activeView.type === 'drd') {
+        const viewer = this.dmnJS.getActiveViewer();
+        const { svg } = await viewer.saveSVG();
+        return svg;
+      } else {
+        return Promise.resolve(undefined);
+      }
+
     } else {
       return Promise.reject('Modeler not initialized');
     }

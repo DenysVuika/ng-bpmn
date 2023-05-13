@@ -12,6 +12,8 @@
     "diagram-js-minimap",
     "dmn-js",
     "dmn-js-properties-panel",
+    "cmmn-js",
+    "cmmn-js-properties-panel",
     "@bpmn-io/add-exporter",
     "hotkeys-js"
   ]

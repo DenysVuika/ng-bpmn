@@ -1,5 +1,5 @@
 /* eslint-disable */
-const esModules = ['bpmn-js', 'diagram-js'];
+const esModules = ['bpmn-js', 'diagram-js', 'cmmn-js'];
 
 export default {
   displayName: 'ng-bpmn',

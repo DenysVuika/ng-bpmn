@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - ng-dmn: support for DMN diagrams
+- ng-cmmn: support for CMMN diagrams
 - ng-bpmn: `autoOpenMinimap` property to automatically open the Minimap (requires `showMinimap` to be `true`)
 - ng-bpmn: add custom diagram exporter metadata
 - ng-bpmn: keyboard support, `hotkeys` property to enable default keyboard combinations (see component README for more details)

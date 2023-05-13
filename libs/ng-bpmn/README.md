@@ -125,3 +125,39 @@ Supported hotkeys:
 | `Ctrl`+`z` | `Command`+`z` | undo |
 | `Ctrl`+`Shift`+`z` | `Command`+`Shift`+`z` | redo |
 | `Backspace` | `Backspace` | remove selection |
+
+## CMMN
+
+```html
+<ng-cmmn [url]="diagramUrl" />
+```
+
+### Properties Panel
+
+```html
+<ng-cmmn [url]="diagramUrl" [showProperties]="true" />
+```
+
+### Keyboard Hotkeys
+
+```html
+<ng-cmmn [url]="diagramUrl" [hotkeys]="true" />
+```
+
+Supported hotkeys:
+
+| Keys | MacOS | Action |
+| --- | --- | --- |
+| `Ctrl`+`a` | `Command`+`a` | select all |
+| `e` | `e` | direct editing |
+| `h` | `h` | hand tool |
+| `l` | `l` | lasso tool |
+| `c` | `c` | global connect tool |
+| `Ctrl`+`=` | `Command`+`=` | zoom in |
+| `Ctrl`+`-` | `Command`+`-` | zoom out |
+| `Ctrl`+`0` | `Command`+`0` | reset zoom |
+| `Ctrl`+`9` | `Command`+`9` | zoom to fit |
+| `Ctrl`+`z` | `Command`+`z` | undo |
+| `Ctrl`+`Shift`+`z` | `Command`+`Shift`+`z` | redo |
+| `Backspace` | `Backspace` | remove selection |
+| `Ctrl`+`f` | `Command`+`f` | find |

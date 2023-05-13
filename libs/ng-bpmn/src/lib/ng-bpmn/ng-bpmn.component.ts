@@ -29,15 +29,11 @@ import { DiagramMinimap } from '../core/modeling/DiagramMinimap';
 import { debounce } from '../utils/debounce';
 import { ImportEvent } from '../core/ImportEvent';
 import { exporter } from '../core/exporter';
+import { ImportCallback } from '../core/ImportCallback';
 
 export interface DiagramChangedEvent {
   xml?: string;
   error?: Error;
-}
-
-interface ImportCallback {
-  error?: Error;
-  warnings?: string[];
 }
 
 @Component({
@@ -119,10 +115,6 @@ export class NgBpmnComponent extends ModelerComponent implements Modeler, OnInit
     modeler.on('import.done', onChanged);
 
     this.bpmnJS = modeler;
-
-    if (this.url) {
-      this.loadUrl(this.url);
-    }
   }
 
   ngOnChanges(changes: SimpleChanges) {

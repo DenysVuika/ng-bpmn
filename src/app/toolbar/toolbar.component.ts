@@ -18,7 +18,7 @@ export class AppToolbarComponent {
 
   async saveXML(modeler?: Modeler) {
     if (modeler) {
-      const content = await modeler.saveSVG();
+      const content = await modeler.saveXML();
       if (content) {
         const blob = new Blob([content]);
         saveAs(blob, 'diagram.xml');

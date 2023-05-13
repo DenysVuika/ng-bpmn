@@ -27,6 +27,8 @@
     "diagram-js": "^12.0.2",
     "dmn-js": "^14.1.5",
     "dmn-js-properties-panel": "^1.3.2",
+    "cmmn-js": "^0.20.0",
+    "cmmn-js-properties-panel": "^0.9.0",
     "hotkeys-js": "^3.10.2",
     "tslib": "^2.3.0"
   },

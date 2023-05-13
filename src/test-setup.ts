@@ -35,3 +35,26 @@ jest.mock('dmn-js-properties-panel', () => {
     default: jest.fn()
   };
 });
+
+jest.mock('cmmn-js/lib/Modeler', () => {
+  return {
+    default: jest.fn().mockImplementation(() => {
+      return {
+        on: jest.fn(),
+        destroy: jest.fn()
+      };
+    })
+  };
+});
+
+jest.mock('cmmn-js-properties-panel', () => {
+  return {
+    default: jest.fn()
+  };
+});
+
+jest.mock('cmmn-js-properties-panel/lib/provider/cmmn', () => {
+  return {
+    default: jest.fn()
+  };
+});

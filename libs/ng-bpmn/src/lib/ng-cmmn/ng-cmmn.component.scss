@@ -1,0 +1,34 @@
+@import "~cmmn-js/dist/assets/diagram-js.css";
+@import "~cmmn-js-properties-panel/dist/assets/cmmn-js-properties-panel.css";
+@import "~cmmn-js/dist/assets/cmmn-font/css/cmmn.css";
+
+ng-cmmn {
+  display: flex;
+  height: 100%;
+
+  .modeler {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+
+    .canvas {
+      flex: 100%;
+    }
+
+    .properties {
+      display: none;
+    }
+
+    &.with-properties {
+      .canvas {
+        flex: 80%;
+      }
+
+      .properties {
+        flex: 20%;
+        display: block;
+      }
+    }
+  }
+}

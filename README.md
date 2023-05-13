@@ -15,6 +15,7 @@ Standalone BPMN components for your Angular applications.
 
 - [ng-bpmn](./libs/ng-bpmn/README.md)
 - [ng-cmn](./libs/ng-bpmn/README.md)
+- [ng-cmmn](./libs/ng-bpmn/README.md)
 
 ## Demo Application
 
