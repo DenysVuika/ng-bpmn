@@ -7,12 +7,10 @@ import { ModelerComponent } from '../core/ModelerComponent';
 import { Modeler } from '../core/Modeler';
 import { Observable, Subscription, from, map, of, switchMap } from 'rxjs';
 import { ImportEvent } from '../core/ImportEvent';
-import { exporter } from '../core/exporter';
 import DiagramActionsModule from '../core/modeling/DiagramActionsModule';
 import DmnActionsModule from '../core/modeling/DmnActionsModule';
 import { EditorActions } from '../core/modeling/EditorActions';
 import { ModelerActions } from '../core/modeling/ModelerActions';
-import AddExporter from '@bpmn-io/add-exporter';
 
 export type DmnViewType = 'drd' | 'decisionTable' | 'literalExpression';
 
@@ -59,7 +57,6 @@ export class NgDmnComponent extends ModelerComponent implements Modeler, OnInit,
   ngOnInit(): void {
     this.dmnJS = new DmnModeler({
       container: this.canvas?.nativeElement,
-      exporter,
       drd: {
         propertiesPanel: {
           parent: this.properties?.nativeElement
