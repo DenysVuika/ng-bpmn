@@ -144,6 +144,10 @@ export class NgBpmnComponent extends ModelerComponent implements Modeler, OnInit
     }
   }
 
+  toggleProperties() {
+    this.showProperties = !this.showProperties;
+  }
+
   loadUrl(url: string): Subscription {
     return this.http
       .get(url, { responseType: 'text' })

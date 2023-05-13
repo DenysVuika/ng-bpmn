@@ -1,7 +1,7 @@
 import { NgIf } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { DiagramChangedEvent, ImportEvent, NgBpmnComponent, NgDmnComponent } from '@denysvuika/ng-bpmn';
+import { DiagramChangedEvent, ImportEvent, Modeler, NgBpmnComponent, NgDmnComponent } from '@denysvuika/ng-bpmn';
 import { saveAs } from 'file-saver';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -32,7 +32,6 @@ import { MatTabsModule } from '@angular/material/tabs';
 export class AppComponent {
   title = 'ng-bpmn-app';
   importError?: Error;
-  showProperties = false;
 
   handleImported(event: ImportEvent) {
     const { type, error, warnings } = event;
@@ -48,22 +47,20 @@ export class AppComponent {
     this.importError = error;
   }
 
-  saveXML(bpmnComponent: NgBpmnComponent) {
-    bpmnComponent.saveXML().then((content) => {
-      if (content) {
-        const blob = new Blob([content]);
-        saveAs(blob, 'diagram.xml');
-      }
-    });
+  async saveXML(modeler: Modeler) {
+    const content = await modeler.saveSVG();
+    if (content) {
+      const blob = new Blob([content]);
+      saveAs(blob, 'diagram.xml');
+    }
   }
 
-  saveSVG(bpmnComponent: NgBpmnComponent) {
-    bpmnComponent.saveSVG().then((content) => {
-      if (content) {
-        const blob = new Blob([content], { type: 'image/svg+xml' });
-        saveAs(blob, 'diagram.svg');
-      }
-    });
+  async saveSVG(modeler: Modeler) {
+    const content = await modeler.saveSVG();
+    if (content) {
+      const blob = new Blob([content], { type: 'image/svg+xml' });
+      saveAs(blob, 'diagram.svg');
+    }
   }
 
   onChanged($event: DiagramChangedEvent) {

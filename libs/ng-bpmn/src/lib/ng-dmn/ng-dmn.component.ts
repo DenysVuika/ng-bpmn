@@ -156,7 +156,8 @@ export class NgDmnComponent extends ModelerComponent implements Modeler, OnInit,
 
   async saveXML(): Promise<string | undefined> {
     if (this.dmnJS) {
-      const { xml } = await this.dmnJS.saveXML({ format: true });
+      const viewer = this.dmnJS.getActiveViewer();
+      const { xml } = await viewer.saveXML({ format: true });
       return xml;
     } else {
       return Promise.reject('Modeler not initialized');
@@ -165,7 +166,8 @@ export class NgDmnComponent extends ModelerComponent implements Modeler, OnInit,
 
   async saveSVG(): Promise<string | undefined> {
     if (this.dmnJS) {
-      const { svg } = await this.dmnJS.saveSVG();
+      const viewer = this.dmnJS.getActiveViewer();
+      const { svg } = await viewer.saveSVG();
       return svg;
     } else {
       return Promise.reject('Modeler not initialized');
@@ -200,5 +202,9 @@ export class NgDmnComponent extends ModelerComponent implements Modeler, OnInit,
   protected override unbindHotkeys() {
     console.log('Unbinding DMN hotkeys');
     super.unbindHotkeys();
+  }
+
+  toggleProperties() {
+    this.showProperties = !this.showProperties;
   }
 }

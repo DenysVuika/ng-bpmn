@@ -2,12 +2,6 @@
   <mat-tab label="BPMN">
     <ng-template matTabContent>
       <mat-toolbar>
-        <button mat-icon-button>
-          <mat-icon>menu</mat-icon>
-        </button>
-        <span>ng-bpmn</span>
-        <span class="example-spacer"></span>
-
         <button mat-icon-button [matMenuTriggerFor]="menu" matTooltip="Download diagram">
           <mat-icon fontSet="material-icons-outlined">cloud_download</mat-icon>
         </button>
@@ -16,14 +10,14 @@
           <button mat-menu-item (click)="saveSVG(bpmn)">Save SVG</button>
         </mat-menu>
 
-        <button mat-icon-button matTooltip="Toggle Properties" (click)="showProperties = !showProperties">
+        <button mat-icon-button matTooltip="Toggle Properties" (click)="bpmn.toggleProperties()">
           <mat-icon fontSet="material-icons-outlined">wysiwyg</mat-icon>
         </button>
       </mat-toolbar>
 
       <ng-bpmn #bpmn
         [url]="'/assets/diagram.bpmn'"
-        [showProperties]="showProperties"
+        [showProperties]="false"
         [showMinimap]="true"
         [hotkeys]="true"
         (importDone)="handleImported($event)"
@@ -33,9 +27,23 @@
 
   <mat-tab label="DMN">
     <ng-template matTabContent>
-      <ng-dmn
+      <mat-toolbar>
+        <button mat-icon-button [matMenuTriggerFor]="menu" matTooltip="Download diagram">
+          <mat-icon fontSet="material-icons-outlined">cloud_download</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="saveXML(dmn)">Save XML</button>
+          <button mat-menu-item (click)="saveSVG(dmn)">Save SVG</button>
+        </mat-menu>
+
+        <button mat-icon-button matTooltip="Toggle Properties" (click)="dmn.toggleProperties()">
+          <mat-icon fontSet="material-icons-outlined">wysiwyg</mat-icon>
+        </button>
+      </mat-toolbar>
+
+      <ng-dmn #dmn
         [url]="'/assets/diagram.dmn'"
-        [showProperties]="showProperties"
+        [showProperties]="false"
         [hotkeys]="true" />
     </ng-template>
   </mat-tab>
