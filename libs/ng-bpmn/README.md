@@ -92,22 +92,22 @@ export class AppComponent {
 
 ![minimap](https://github.com/DenysVuika/ng-bpmn/blob/main/libs/ng-bpmn/docs/ng-bpmn-minimap.png?raw=true)
 
-## CMN
+## DMN
 
 ```html
-<ng-cmn [url]="diagramUrl" />
+<ng-dmn [url]="diagramUrl" />
 ```
 
 ### Properties Panel
 
 ```html
-<ng-bpmn [url]="diagramUrl" [showProperties]="true" />
+<ng-dmn [url]="diagramUrl" [showProperties]="true" />
 ```
 
 ### Keyboard Hotkeys
 
 ```html
-<ng-bpmn [url]="diagramUrl" [hotkeys]="true" />
+<ng-dmn [url]="diagramUrl" [hotkeys]="true" />
 ```
 
 Supported hotkeys:
