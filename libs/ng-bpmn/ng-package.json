@@ -15,6 +15,7 @@
     "cmmn-js",
     "cmmn-js-properties-panel",
     "@bpmn-io/add-exporter",
-    "hotkeys-js"
+    "hotkeys-js",
+    "file-saver"
   ]
 }

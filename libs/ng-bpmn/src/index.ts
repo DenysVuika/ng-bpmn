@@ -4,3 +4,5 @@ export * from './lib/ng-cmmn/ng-cmmn.component';
 
 export * from './lib/core/ImportEvent';
 export * from './lib/core/Modeler';
+
+export * from './lib/services/ModelingService';

@@ -15,6 +15,7 @@
   "bugs": {
     "url": "https://github.com/DenysVuika/ng-bpmn/issues"
   },
+  "keywords": ["angular", "diagram", "bpmn", "dmn", "cmmn", "bpmn-js", "toolkit", "modeler", "process modeling", "components"],
   "peerDependencies": {
     "@angular/common": "^16.0.0",
     "@angular/core": "^16.0.0"
@@ -30,7 +31,8 @@
     "cmmn-js": "^0.20.0",
     "cmmn-js-properties-panel": "^0.9.0",
     "hotkeys-js": "^3.10.2",
-    "tslib": "^2.3.0"
+    "tslib": "^2.3.0",
+    "file-saver": "^2.0.5"
   },
   "sideEffects": false
 }
