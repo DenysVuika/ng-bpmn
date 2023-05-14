@@ -7,27 +7,26 @@
     <button mat-menu-item (click)="saveSVG()">Save SVG</button>
   </mat-menu>
 
+  <mat-divider [vertical]="true" />
+
+  <app-toolbar-action [modeler]="modeler" [action]="ModelerActions.copy" [tooltip]="'Copy'" [icon]="'content_copy'" />
+  <app-toolbar-action [modeler]="modeler" [action]="ModelerActions.cut" [tooltip]="'Cut'" [icon]="'content_cut'" />
+  <app-toolbar-action [modeler]="modeler" [action]="ModelerActions.paste" [tooltip]="'Paste'" [icon]="'content_paste'" />
+
+  <mat-divider [vertical]="true" />
+
+  <app-toolbar-action [modeler]="modeler" [action]="ModelerActions.undo" [tooltip]="'Undo'" [icon]="'undo'" />
+  <app-toolbar-action [modeler]="modeler" [action]="ModelerActions.redo" [tooltip]="'Redo'" [icon]="'redo'" />
+
+  <mat-divider [vertical]="true" />
+
+  <app-toolbar-action [modeler]="modeler" [action]="ModelerActions.zoomIn" [tooltip]="'Zoom In'" [icon]="'zoom_in'" />
+  <app-toolbar-action [modeler]="modeler" [action]="ModelerActions.zoomOut" [tooltip]="'Zoom Out'" [icon]="'zoom_out'" />
+  <app-toolbar-action [modeler]="modeler" [action]="ModelerActions.zoomToFit" [tooltip]="'Zoom to Fit'" [icon]="'zoom_in_map'" />
+
+  <mat-divider [vertical]="true" />
+
   <button mat-icon-button matTooltip="Toggle Properties" (click)="toggleProperties()">
     <mat-icon fontSet="material-icons-outlined">wysiwyg</mat-icon>
-  </button>
-
-  <button mat-icon-button matTooltip="Undo" [disabled]="!canUndo()" (click)="undo()">
-    <mat-icon fontSet="material-icons-outlined">undo</mat-icon>
-  </button>
-
-  <button mat-icon-button matTooltip="Redo" [disabled]="!canRedo()" (click)="redo()">
-    <mat-icon fontSet="material-icons-outlined">redo</mat-icon>
-  </button>
-
-  <button mat-icon-button matTooltip="Zoom In" [disabled]="!canZoomIn()" (click)="zoomIn()">
-    <mat-icon fontSet="material-icons-outlined">zoom_in</mat-icon>
-  </button>
-
-  <button mat-icon-button matTooltip="Zoom Out" [disabled]="!canZoomOut()" (click)="zoomOut()">
-    <mat-icon fontSet="material-icons-outlined">zoom_out</mat-icon>
-  </button>
-
-  <button mat-icon-button matTooltip="Zoom to Fit" [disabled]="!canZoomToFit()" (click)="zoomToFit()">
-    <mat-icon fontSet="material-icons-outlined">zoom_in_map</mat-icon>
   </button>
 </mat-toolbar>

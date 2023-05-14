@@ -1,21 +1,27 @@
-import { Component, Input, inject } from '@angular/core';
+import { Component, Input, ViewEncapsulation, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatDividerModule } from '@angular/material/divider';
 import { Modeler, ModelingService, ModelerActions } from '@denysvuika/ng-bpmn';
+import { AppToolbarActionComponent } from './toolbar-action.component';
 
 @Component({
   standalone: true,
-  imports: [MatToolbarModule, MatIconModule, MatButtonModule, MatMenuModule, MatTooltipModule],
+  imports: [MatToolbarModule, MatIconModule, MatButtonModule, MatMenuModule, MatTooltipModule, MatDividerModule, AppToolbarActionComponent],
   selector: 'app-toolbar',
-  templateUrl: './toolbar.component.html'
+  templateUrl: './toolbar.component.html',
+  styleUrls: ['./toolbar.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class AppToolbarComponent {
   private modelingService = inject(ModelingService);
 
   @Input({ required: true }) modeler?: Modeler;
+
+  ModelerActions = ModelerActions;
 
   async saveXML() {
     if (this.modeler) {
@@ -31,45 +37,5 @@ export class AppToolbarComponent {
 
   toggleProperties(): void {
     this.modeler?.toggleProperties();
-  }
-
-  canUndo(): boolean {
-    return !!this.modeler?.supportsAction(ModelerActions.canUndo);
-  }
-
-  undo(): void {
-    this.modeler?.triggerAction(ModelerActions.undo);
-  }
-
-  canRedo(): boolean {
-    return !!this.modeler?.supportsAction(ModelerActions.canRedo);
-  }
-
-  redo(): void {
-    this.modeler?.triggerAction(ModelerActions.redo);
-  }
-
-  canZoomIn(): boolean {
-    return !!this.modeler?.supportsAction(ModelerActions.zoomIn);
-  }
-
-  zoomIn(): void {
-    this.modeler?.triggerAction(ModelerActions.zoomIn);
-  }
-
-  canZoomOut(): boolean {
-    return !!this.modeler?.supportsAction(ModelerActions.zoomOut);
-  }
-
-  zoomOut(): void {
-    this.modeler?.triggerAction(ModelerActions.zoomOut);
-  }
-
-  canZoomToFit(): boolean {
-    return !!this.modeler?.supportsAction(ModelerActions.zoomToFit);
-  }
-
-  zoomToFit(): void {
-    this.modeler?.triggerAction(ModelerActions.zoomToFit);
   }
 }
