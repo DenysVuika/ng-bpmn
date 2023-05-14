@@ -4,7 +4,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { Modeler, ModelingService } from '@denysvuika/ng-bpmn';
+import { Modeler, ModelingService, ModelerActions } from '@denysvuika/ng-bpmn';
 
 @Component({
   standalone: true,
@@ -26,6 +26,32 @@ export class AppToolbarComponent {
   async saveSVG(modeler?: Modeler) {
     if (modeler) {
       this.modelingService.downloadSVG(modeler);
+    }
+  }
+
+  canUndo(modeler?: Modeler) {
+    if (modeler) {
+      return modeler.supportsAction(ModelerActions.canUndo);
+    }
+    return false;
+  }
+
+  undo(modeler?: Modeler) {
+    if (modeler) {
+      modeler.triggerAction(ModelerActions.undo);
+    }
+  }
+
+  canRedo(modeler?: Modeler) {
+    if (modeler) {
+      return modeler.supportsAction(ModelerActions.canRedo);
+    }
+    return false;
+  }
+
+  redo(modeler?: Modeler) {
+    if (modeler) {
+      modeler.triggerAction(ModelerActions.redo);
     }
   }
 }

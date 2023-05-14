@@ -10,4 +10,12 @@
   <button mat-icon-button matTooltip="Toggle Properties" (click)="modeler?.toggleProperties()">
     <mat-icon fontSet="material-icons-outlined">wysiwyg</mat-icon>
   </button>
+
+  <button mat-icon-button matTooltip="Undo" [disabled]="!canUndo(modeler)" (click)="undo(modeler)">
+    <mat-icon fontSet="material-icons-outlined">undo</mat-icon>
+  </button>
+
+  <button mat-icon-button matTooltip="Redo" [disabled]="!canRedo(modeler)" (click)="redo(modeler)">
+    <mat-icon fontSet="material-icons-outlined">redo</mat-icon>
+  </button>
 </mat-toolbar>

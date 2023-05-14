@@ -8,14 +8,17 @@ export abstract class ModelerComponent {
   abstract get editorActions(): EditorActions | undefined;
 
   supportsAction(action: string): boolean {
-    if (this.editorActions) {
+    if (action && this.editorActions) {
       return this.editorActions.isRegistered(action);
     }
     return false;
   }
 
   triggerAction(action: string, params?: any): any {
-    return this.editorActions?.trigger(action, params);
+    if (action) {
+      return this.editorActions?.trigger(action, params);
+    }
+    return undefined;
   }
 
   protected bindHotkeys(actions: { [key: string]: ModelerActions }) {
