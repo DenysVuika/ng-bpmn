@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - new `ModelingService` to handle frequently used modeling actions (i.e. export to SVG/XML, etc.)
-- app: Undo/Redo buttons demo
+- app: new toolbar actions: Undo/Redo, Zoom
 
 ### Changed
 

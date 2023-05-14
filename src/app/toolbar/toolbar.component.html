@@ -3,19 +3,31 @@
     <mat-icon fontSet="material-icons-outlined">cloud_download</mat-icon>
   </button>
   <mat-menu #menu="matMenu">
-    <button mat-menu-item (click)="saveXML(modeler)">Save XML</button>
-    <button mat-menu-item (click)="saveSVG(modeler)">Save SVG</button>
+    <button mat-menu-item (click)="saveXML()">Save XML</button>
+    <button mat-menu-item (click)="saveSVG()">Save SVG</button>
   </mat-menu>
 
-  <button mat-icon-button matTooltip="Toggle Properties" (click)="modeler?.toggleProperties()">
+  <button mat-icon-button matTooltip="Toggle Properties" (click)="toggleProperties()">
     <mat-icon fontSet="material-icons-outlined">wysiwyg</mat-icon>
   </button>
 
-  <button mat-icon-button matTooltip="Undo" [disabled]="!canUndo(modeler)" (click)="undo(modeler)">
+  <button mat-icon-button matTooltip="Undo" [disabled]="!canUndo()" (click)="undo()">
     <mat-icon fontSet="material-icons-outlined">undo</mat-icon>
   </button>
 
-  <button mat-icon-button matTooltip="Redo" [disabled]="!canRedo(modeler)" (click)="redo(modeler)">
+  <button mat-icon-button matTooltip="Redo" [disabled]="!canRedo()" (click)="redo()">
     <mat-icon fontSet="material-icons-outlined">redo</mat-icon>
+  </button>
+
+  <button mat-icon-button matTooltip="Zoom In" [disabled]="!canZoomIn()" (click)="zoomIn()">
+    <mat-icon fontSet="material-icons-outlined">zoom_in</mat-icon>
+  </button>
+
+  <button mat-icon-button matTooltip="Zoom Out" [disabled]="!canZoomOut()" (click)="zoomOut()">
+    <mat-icon fontSet="material-icons-outlined">zoom_out</mat-icon>
+  </button>
+
+  <button mat-icon-button matTooltip="Zoom to Fit" [disabled]="!canZoomToFit()" (click)="zoomToFit()">
+    <mat-icon fontSet="material-icons-outlined">zoom_in_map</mat-icon>
   </button>
 </mat-toolbar>

@@ -17,41 +17,59 @@ export class AppToolbarComponent {
 
   @Input({ required: true }) modeler?: Modeler;
 
-  async saveXML(modeler?: Modeler) {
-    if (modeler) {
-      this.modelingService.downloadXML(modeler);
+  async saveXML() {
+    if (this.modeler) {
+      this.modelingService.downloadXML(this.modeler);
     }
   }
 
-  async saveSVG(modeler?: Modeler) {
-    if (modeler) {
-      this.modelingService.downloadSVG(modeler);
+  async saveSVG() {
+    if (this.modeler) {
+      this.modelingService.downloadSVG(this.modeler);
     }
   }
 
-  canUndo(modeler?: Modeler) {
-    if (modeler) {
-      return modeler.supportsAction(ModelerActions.canUndo);
-    }
-    return false;
+  toggleProperties(): void {
+    this.modeler?.toggleProperties();
   }
 
-  undo(modeler?: Modeler) {
-    if (modeler) {
-      modeler.triggerAction(ModelerActions.undo);
-    }
+  canUndo(): boolean {
+    return !!this.modeler?.supportsAction(ModelerActions.canUndo);
   }
 
-  canRedo(modeler?: Modeler) {
-    if (modeler) {
-      return modeler.supportsAction(ModelerActions.canRedo);
-    }
-    return false;
+  undo(): void {
+    this.modeler?.triggerAction(ModelerActions.undo);
   }
 
-  redo(modeler?: Modeler) {
-    if (modeler) {
-      modeler.triggerAction(ModelerActions.redo);
-    }
+  canRedo(): boolean {
+    return !!this.modeler?.supportsAction(ModelerActions.canRedo);
+  }
+
+  redo(): void {
+    this.modeler?.triggerAction(ModelerActions.redo);
+  }
+
+  canZoomIn(): boolean {
+    return !!this.modeler?.supportsAction(ModelerActions.zoomIn);
+  }
+
+  zoomIn(): void {
+    this.modeler?.triggerAction(ModelerActions.zoomIn);
+  }
+
+  canZoomOut(): boolean {
+    return !!this.modeler?.supportsAction(ModelerActions.zoomOut);
+  }
+
+  zoomOut(): void {
+    this.modeler?.triggerAction(ModelerActions.zoomOut);
+  }
+
+  canZoomToFit(): boolean {
+    return !!this.modeler?.supportsAction(ModelerActions.zoomToFit);
+  }
+
+  zoomToFit(): void {
+    this.modeler?.triggerAction(ModelerActions.zoomToFit);
   }
 }
